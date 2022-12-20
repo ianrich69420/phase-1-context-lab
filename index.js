@@ -1,4 +1,56 @@
-/* Your Code Here */
+// Your code here
+function createEmployeeRecord(array){
+    return {
+        firstName: array[0],
+        familyName: array[1],
+        title: array[2],
+        payPerHour: array[3],
+        timeInEvents: [],
+        timeOutEvents: []
+    }
+}
+
+function createEmployeeRecords(arrayOfRecords){
+    return arrayOfRecords.map(createEmployeeRecord)
+}
+
+function createTimeInEvent(date){
+    this.timeInEvents.push({
+        type: "TimeIn",
+        hour: Number(date.slice(-4)),
+        date: date.slice(0, date.length - 5)
+    })
+    return this
+}
+
+function createTimeOutEvent(date){
+    this.timeOutEvents.push({
+        type: "TimeOut",
+        hour: Number(date.slice(-4)),
+        date: date.slice(0, date.length - 5)
+    })
+    return this
+}
+
+function hoursWorkedOnDate(date){
+    let timeInEvent = this.timeInEvents.find(key => key.date === date)
+    let timeOutEvent = this.timeOutEvents.find(key => key.date === date)
+    return (timeOutEvent.hour - timeInEvent.hour)/100;
+}
+
+function wagesEarnedOnDate(date){
+    return hoursWorkedOnDate.call(this, date) * this.payPerHour
+}
+
+function findEmployeeByFirstName(srcArray, firstName){
+    return srcArray.find(key => key.firstName === firstName)
+}
+
+function calculatePayroll(arrayOfRecords){
+    let totalWages = []
+    arrayOfRecords.forEach(totalWages.push(allWagesFor.call()))
+    return totalWages.reduce((accumulator, currentValue) => accumulator + currentValue)
+}
 
 /*
  We're giving you this function. Take a look at it, you might see some usage
@@ -9,7 +61,7 @@
  for you to use if you need it!
  */
 
-const allWagesFor = function () {
+ const allWagesFor = function () {
     const eligibleDates = this.timeInEvents.map(function (e) {
         return e.date
     })
